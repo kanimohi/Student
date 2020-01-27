@@ -1,5 +1,7 @@
 # Compiled source #
 ###################
+.idea
+spring-boot-web.iml
 *.com
 *.class
 *.dll
