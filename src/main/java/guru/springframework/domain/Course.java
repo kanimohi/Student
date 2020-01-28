@@ -3,8 +3,7 @@ package guru.springframework.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+
 
 @Entity
 @Table(name = "course_details")
@@ -16,6 +15,18 @@ public class Course {
     private Integer id;
     @Column(name = "course_name")
     private String name;
+
+    @ManyToOne
+    private Fees fees;
+
+    public Fees getFees() {
+        return fees;
+    }
+
+    public void setFees(Fees fees) {
+        this.fees = fees;
+    }
+
     public Course() { }
 
     public Course(Integer id, String name) {

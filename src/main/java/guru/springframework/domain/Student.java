@@ -3,11 +3,13 @@ package guru.springframework.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "student_table")
 
-public class Student {
+public class Student<set> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "student_id")
@@ -19,10 +21,33 @@ public class Student {
     private String lastname;
     @Column(name = "dob")
     private String dateofbirth;
-    @Column(name = "phone number")
+    @Column(name = "phonenumber")
     private Integer phonenumber;
     @Column(name = "email_id")
     private String email;
+
+    @OneToOne
+    private Address address;
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "STUDENT_COURSE", joinColumns = { @JoinColumn(name = "student_id") }, inverseJoinColumns = { @JoinColumn(name = "course_id") })
+    private Set<Course> courses = new HashSet<Course>();
+
+    public Set<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(Set<Course> courses) {
+        this.courses = courses;
+    }
 
     public Student() { }
 
