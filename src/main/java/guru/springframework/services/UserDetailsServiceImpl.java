@@ -1,4 +1,4 @@
 package guru.springframework.services;
 
-public class UserDetailServiceImpl {
+public class UserDetailsServiceImpl {
 }

@@ -1,4 +1,4 @@
 package guru.springframework.services;
 
-public interface UserService {
+public class UserServiceImpl {
 }
