@@ -1,8 +1,8 @@
 package guru.springframework.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -10,26 +10,31 @@ import javax.persistence.*;
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "course_id")
-    @JsonIgnore
     private Integer id;
     @Column(name = "course_name")
     private String name;
 
-    @ManyToOne
-    private Fees fees;
+    @ManyToMany(mappedBy = "courses")
+    private Set<Student> students;
 
-    public Fees getFees() {
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "COURSE_FEES",
+        joinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "fees_id", referencedColumnName = "id"))
+    private Set<Fees> fees;
+
+    public Set<Fees> getFees() {
         return fees;
     }
 
-    public void setFees(Fees fees) {
+    public void setFees(Set<Fees> fees) {
         this.fees = fees;
     }
 
     public Course() { }
 
     public Course(Integer id, String name) {
+        this.id = id;
         this.name = name;
     }
 
@@ -37,17 +42,16 @@ public class Course {
         return id;
     }
 
-    public Course setId(Integer id) {
+    public void setId(Integer id) {
         this.id = id;
-        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public Course setName(String name) {
+    public void setName(String name) {
         this.name = name;
-        return this;
     }
+
 }

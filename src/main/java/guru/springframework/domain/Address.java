@@ -1,7 +1,5 @@
 package guru.springframework.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 
 @Entity
@@ -9,15 +7,17 @@ import javax.persistence.*;
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "address_id")
-    @JsonIgnore
     private Integer id;
     @Column(name ="addressline1")
-    private String addressline1;
+    private String addressLine1;
     @Column(name = "pincode")
-    private Integer pincode;
+    private Integer pinCode;
     @Column(name = "city")
     private String city;
+    @Column(name = "state")
+    private String state;
+    @Column(name = "country")
+    private String country;
 
     public Address() { }
 
@@ -30,21 +30,21 @@ public class Address {
         return this;
     }
 
-    public String getAddressline1() {
-        return addressline1;
+    public String getAddressLine1() {
+        return addressLine1;
     }
 
-    public Address setAddressline1(String addressline1) {
-        this.addressline1 = addressline1;
+    public Address setAddressLine1(String addressLine1) {
+        this.addressLine1 = addressLine1;
         return this;
     }
 
-    public Integer getPincode() {
-        return pincode;
+    public Integer getPinCode() {
+        return pinCode;
     }
 
-    public Address setPincode(Integer pincode) {
-        this.pincode = pincode;
+    public Address setPinCode(Integer pinCode) {
+        this.pinCode = pinCode;
         return this;
     }
 
@@ -55,5 +55,21 @@ public class Address {
     public Address setCity(String city) {
         this.city = city;
         return this;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 }

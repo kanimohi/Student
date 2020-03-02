@@ -1,29 +1,23 @@
 package guru.springframework.domain;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "student_table")
+@Table(name = "student_details")
 
-public class Student<set> {
+public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "student_id")
-    @JsonIgnore
     private Integer id;
-    @Column(name = "firstname")
-    private String firstname;
-    @Column(name = "lastname")
-    private String lastname;
+    @Column(name = "first_name")
+    private String firstName;
+    @Column(name = "last_name")
+    private String lastName;
     @Column(name = "dob")
-    private String dateofbirth;
+    private String dob;
     @Column(name = "phonenumber")
-    private Integer phonenumber;
-    @Column(name = "email_id")
+    private Integer phoneNumber;
+    @Column(name = "email")
     private String email;
 
     @OneToOne
@@ -37,9 +31,33 @@ public class Student<set> {
         this.address = address;
     }
 
+    @OneToOne
+    private  Attendance attendance;
+
+    public Attendance getAttendance() {
+        return attendance;
+    }
+
+    public void setAttendance(Attendance attendance) {
+        this.attendance = attendance;
+    }
+
+    @OneToOne
+    private StudentMarks studentMarks;
+
+    public StudentMarks getStudentMarks() {
+        return studentMarks;
+    }
+
+    public void setStudentMarks(StudentMarks studentMarks) {
+        this.studentMarks = studentMarks;
+    }
+
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "STUDENT_COURSE", joinColumns = { @JoinColumn(name = "student_id") }, inverseJoinColumns = { @JoinColumn(name = "course_id") })
-    private Set<Course> courses = new HashSet<Course>();
+    @JoinTable(name = "STUDENT_COURSE",
+        joinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id"))
+    private Set<Course> courses;
 
     public Set<Course> getCourses() {
         return courses;
@@ -51,13 +69,13 @@ public class Student<set> {
 
     public Student() { }
 
-    public Student(Integer id, String firstname, String lastname, String dateofbirth, Integer phonenumber, String email) {
+    public Student(Integer id, String firstName, String lastName, String dob, Integer phoneNumber, String email) {
+        this.id = id;
         this.email = email;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.dateofbirth = dateofbirth;
-        this.phonenumber = phonenumber;
-
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dob = dob;
+        this.phoneNumber = phoneNumber;
     }
 
     public Integer getId() {
@@ -68,36 +86,36 @@ public class Student<set> {
         this.id = id;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getDateofbirth() {
-        return dateofbirth;
+    public String getDob() {
+        return dob;
     }
 
-    public void setDateofbirth(String dateofbirth) {
-        this.dateofbirth = dateofbirth;
+    public void setDob(String dob) {
+        this.dob = dob;
     }
 
-    public Integer getPhonenumber() {
-        return phonenumber;
+    public Integer getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhonenumber(Integer phonenumber) {
-        this.phonenumber = phonenumber;
+    public void setPhoneNumber(Integer phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getEmail() {

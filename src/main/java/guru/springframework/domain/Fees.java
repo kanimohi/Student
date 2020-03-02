@@ -1,8 +1,7 @@
 package guru.springframework.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
+import java.util.Set;
 
 
 @Entity
@@ -10,13 +9,14 @@ import javax.persistence.*;
 public class Fees {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "fees_id")
-    @JsonIgnore
     private Integer id;
     @Column(name ="fees_heading")
-    private String feesheading;
+    private String feesHeading;
     @Column(name = "fees_amount")
-    private Integer feesamount;
+    private Integer feesAmount;
+
+    @ManyToMany(mappedBy = "fees")
+    private Set<Course> courses;
 
     public Fees(){}
 
@@ -28,20 +28,20 @@ public class Fees {
         this.id = id;
     }
 
-    public String getFeesheading() {
-        return feesheading;
+    public String getFeesHeading() {
+        return feesHeading;
     }
 
-    public void setFeesheading(String feesheading) {
-        this.feesheading = feesheading;
+    public void setFeesHeading(String feesHeading) {
+        this.feesHeading = feesHeading;
     }
 
-    public Integer getFeesamount() {
-        return feesamount;
+    public Integer getFeesAmount() {
+        return feesAmount;
     }
 
-    public void setFeesamount(Integer feesamount) {
-        this.feesamount = feesamount;
+    public void setFeesamount(Integer feesAmount) {
+        this.feesAmount = feesAmount;
     }
 
 

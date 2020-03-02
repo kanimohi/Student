@@ -1,4 +1,7 @@
 package guru.springframework.repositories;
 
-public interface UserRoleRepository {
+import guru.springframework.domain.UserRole;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface UserRoleRepository extends JpaRepository<UserRole,Integer> {
 }
