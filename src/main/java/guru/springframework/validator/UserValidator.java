@@ -1,4 +1,4 @@
-package Validator;
+package guru.springframework.validator;
 
 import guru.springframework.domain.User;
 import guru.springframework.services.UserService;

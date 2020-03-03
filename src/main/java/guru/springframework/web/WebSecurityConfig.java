@@ -1,5 +1,7 @@
-package web;
+package guru.springframework.web;
 
+import guru.springframework.services.UserDetailsServiceImpl;
+import guru.springframework.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -22,8 +24,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailsService userDetailsService;
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+    public BCryptPasswordEncoder passwordEncoder() {
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        return bCryptPasswordEncoder;
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -44,7 +47,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager customAuthenticationManager() throws Exception {
         return authenticationManager();
     }
-    @Bean
+
+    @Bean(name = "userDetailsServiceImpl")
     public UserDetailsService userDetailsService() {
         return super.userDetailsService();
     }
