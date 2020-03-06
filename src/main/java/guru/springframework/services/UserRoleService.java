@@ -1,8 +1,6 @@
 package guru.springframework.services;
 
-import guru.springframework.domain.User;
 import guru.springframework.domain.UserRole;
-import guru.springframework.repositories.UserRepository;
 import guru.springframework.repositories.UserRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

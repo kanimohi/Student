@@ -1,7 +1,8 @@
 package guru.springframework.domain;
 
+import guru.springframework.web.UserDao;
+
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -12,9 +13,6 @@ public class UserRole {
     private Integer id;
     @Column(name = "rolename")
     private String roleName;
-
-    @ManyToMany(mappedBy = "userRole")
-    private Set<User> user;
 
     public UserRole(){}
     public  UserRole(Integer id,String roleName){
