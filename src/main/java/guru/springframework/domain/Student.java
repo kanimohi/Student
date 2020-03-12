@@ -1,6 +1,8 @@
 package guru.springframework.domain;
 import javax.persistence.*;
 import java.util.Set;
+import javax.persistence.Table;
+import javax.persistence.Column;
 
 @Entity
 @Table(name = "student_details")

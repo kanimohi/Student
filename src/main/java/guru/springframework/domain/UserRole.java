@@ -1,9 +1,6 @@
 package guru.springframework.domain;
 
-import guru.springframework.web.UserDao;
-
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Table(name = "role_details")
